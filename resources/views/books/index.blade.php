@@ -20,63 +20,34 @@
             <div class="card-body">
                 <table class="table">
                     <thead>
-
-{{--                    <form action="{{ route('filter') }}" method="GET" style="margin-top: 20px;">--}}
-{{--                        <select name="price_id" id="input">--}}
-{{--                            <option value="0">Select Price</option>--}}
-{{--                            @foreach (\App\Models\Author::select('id', 'authors')->get() as $authors)--}}
-{{--                                <option value="{{ $authors->id }}" {{ $authors->id == $selected_id['authors'] ? 'selected' : '' }}>--}}
-{{--                                    {{ $authors['authors'] }}--}}
-{{--                                </option>--}}
-{{--                            @endforeach--}}
-{{--                        </select>--}}
-{{--                        <select name="color_id" id="input">--}}
-{{--                            <option value="0">Select Color</option>--}}
-{{--                            @foreach (\App\Models\Genre::select('id','name')->get() as $genre)--}}
-{{--                                <option value="{{ $genre->id }}" {{ $genre->id == $selected_id['genre'] ? 'selected' : '' }}>--}}
-{{--                                    {{ $genre['genre'] }}--}}
-{{--                                </option>--}}
-{{--                            @endforeach--}}
-{{--                        </select>--}}
-{{--                        <input type="submit" class="btn btn-danger btn-sm" value="Filter">--}}
-{{--                    </form>--}}
-
-
-
-
-                            @php
-                                $optionsAuthors = $authors->map(function ($author, $key) {
+                        @php
+                            $optionsAuthors = $authors->map(function ($author, $key) {
                                 return ['id' => $author->id, 'name' => $author->fullName];
                                 })->toArray();
-                            @endphp
-
-                            <div class="btn-group dropleft">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Сортировка
-                                </button>
-                                <div class="dropdown-menu">
-                                    <form autocomplete="off" action="{{ route('books.index')}}" method="GET">
-                                        @csrf
-
+                        @endphp
+                        <div class="container">
+                            <div class="row">
+                                <form autocomplete="off" action="{{ route('books.index')}}" method="GET">
+                                    @csrf
+                                    <div class="col align-self-center">
                                         <x-form.select2 label="Автор" id="authors" name="authors[]" :options="$optionsAuthors" :selected="old('authors')" placeholder="Выберите автора"/>
-                                        <x-form.select2 label="Жанр" id="genres" name="genres[]" :options="$genres->toArray()" :selected="old('genres')" placeholder="Выберите жанр"/>
-
-                                        <x-form.input-text name="name" label="Название книги" :value="old('name')" type="text" placeholder="Добавьте название книги"/>
-                                        <x-form.input-text name="description" label="Description" :value="old('description')" type="text" placeholder="Добавьте название книги"/>
-
+                                    </div>
+                                    <div class="col align-self-center">
+                                        <x-form.input-text name="name" label="Название книги" :value="old('name')" type="text" placeholder="Выберите название книги"/>
+                                    </div>
+                                    <div class="col align-self-center">
                                         <button type="submit" class="btn btn-primary">Искать</button>
-
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
-
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Названия</th>
-                        <th scope="col">Автор</th>
-                        <th scope="col">Дата загрузки</th>
-                        <th scope="col">Действия</th>
-                    </tr>
+                        </div>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Названия</th>
+                            <th scope="col">Автор</th>
+                            <th scope="col">Дата загрузки</th>
+                            <th scope="col">Действия</th>
+                        </tr>
                     </thead>
                     <tbody>
                     @foreach ($books as $book)

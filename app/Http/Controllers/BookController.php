@@ -35,19 +35,9 @@ class BookController extends Controller
 
         $filter = app()->make(BookFilter::class, ['queryParams' => array_filter($data)]);
 
-        $books = Book::filter($filter)->paginate(1);
+        $books = Book::filter($filter)->paginate(5);
         $authors = Author::all();
         $genres = Genre::all();
-
-
-//        $author = Author::find(3);
-//
-//        foreach ($author->books as $books) {
-//           echo $books;
-//        }
-
-
-
 
         return view('books.index', [
             'books' => $books,

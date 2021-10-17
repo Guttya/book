@@ -3,9 +3,7 @@
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
-use App\Models\Book;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,27 +28,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', UserController::class);
     Route::resource('books', BookController::class);
     Route::resource('authors', AuthorController::class);
-    Route::resource('tests', TestController::class);
 
-//    Route::get('/', function (Request $request) {
-//
-//        $product = Book::where( function($query) use($request){
-//            return @$request->author_id ?
-//                $query->from('authors')->where('id', $request->id) : '';
-//        })->where(function($query) use($request){
-//            return @$request->genre_id ?
-//                $query->from('genres')->where('id', $request->id) : '';
-//        })
-//            ->with('authors','genres')
-//            ->get();
-//
-//        $selected_id = [];
-//        @$selected_id['authors'] = $request->author_id;
-//        @$selected_id['genres'] = $request->genre_id;
-//
-//        return view('books.index', @compact('books','selected_id'));
-//
-//    })->name('filter');
 });
 
 
